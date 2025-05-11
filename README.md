@@ -36,4 +36,4 @@ A clean implementation of a networking layer in SwiftUI, featuring:
 
 1. Clone the repository:
 ```bash
-git clone [https://github.com/ahmetbostanciklioglu/Metworking-Layer-App.git]
+git clone https://github.com/ahmetbostanciklioglu/Metworking-Layer-App.git
