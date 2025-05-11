@@ -12,7 +12,8 @@ A clean implementation of a networking layer in SwiftUI, featuring:
 ✅ Thread-safe data updates  
 
 <p align="center">
-  <img src="https://i.imgur.com/your-screenshot.png" width="300" alt="App Screenshot">
+  <img src="[https://i.imgur.com/your-screenshot.png](https://github.com/user-attachments/assets/06da6327-e77b-4bf9-9ed6-1f3ebe23b7d8)" width="300" alt="App Screenshot">
+
 </p>
 
 ## Features
