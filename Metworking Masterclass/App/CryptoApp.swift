@@ -11,7 +11,7 @@ import SwiftUI
 struct CryptoApp: App {
     var body: some Scene {
         WindowGroup {
-            Text("1234")
+            ContentView()
         }
     }
 }
