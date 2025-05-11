@@ -11,13 +11,26 @@ class CoinsViewModel: ObservableObject {
     
     @Published var coins = [Coin]()
     @Published var errorMessage: String?
+    
     private let service = CoinDataService()
     
     init() {
-        fetchCoinsWithResult()
+        Task {
+            try await fetchCoins()
+        }
     }
     
-    func fetchCoinsWithResult() {
+    @MainActor
+    func fetchCoins() async throws {
+        self.coins = try await service.fetchCoins()
+    }   
+}
+
+
+// MARK: - Completion Handlers
+
+extension CoinsViewModel {
+    func fetchCoinsWithCompletionHandler() {
         service.fetchCoinsWithResult { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
@@ -27,19 +40,6 @@ class CoinsViewModel: ObservableObject {
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
                 }
-            }
-        }
-    }
-    
-    func fetchCoins() {
-        service.fetchCoins { [weak self] coins, error in
-           guard let self else { return }
-            DispatchQueue.main.async{
-                if let error {
-                    self.errorMessage = error.localizedDescription
-                }
-                
-                self.coins = coins ?? []
             }
         }
     }
