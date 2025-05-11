@@ -13,15 +13,19 @@ class CoinsViewModel: ObservableObject {
     @Published var price = ""
     
     init() {
-        fetchPrice(coin: "litecoin")
+        fetchPrice(coin: "bitcoin") // main thread
     }
     
     func fetchPrice(coin: String) {
+        print(Thread.current)
+        
         let urlString = "https://api.coingecko.com/api/v3/simple/price?ids=\(coin)&vs_currencies=usd"
         
         guard let url = URL(string: urlString) else { return }
 
         URLSession.shared.dataTask(with: url) { data, response, error in
+            print(Thread.current) // background thread
+            
             guard let data else { return }
             guard let jsonObject = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
             print(jsonObject)
@@ -32,6 +36,7 @@ class CoinsViewModel: ObservableObject {
             guard let price = value["usd"] else { return }
             
             DispatchQueue.main.async {
+                print(Thread.current) // main thread
                 self.coin = coin.capitalized
                 self.price = "$\(price)"
             }

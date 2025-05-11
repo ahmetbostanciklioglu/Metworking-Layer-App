@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var viewModel = CoinsViewModel()
-    
+     
     var body: some View {
         Text("\(viewModel.coin): \(viewModel.price)")
     }
